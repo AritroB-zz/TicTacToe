@@ -1,1 +1,1 @@
-console.log("Welcome to Tic Tac Toe");
+console.log("WELCOME TO TIC TAC TOE!");
