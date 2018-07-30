@@ -13,12 +13,13 @@ $(document).ready(function(){
             //input X for first player
             if((moves%2==1))
             {
-                $(this).append('X');
+                $(this).append('X');                               
             }
             //input O for second player
             else
             {
                 $(this).append('O');
+                $(this).css('color','blue'); 
             }
         }
         moves++;
