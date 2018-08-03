@@ -7,3 +7,15 @@
     color: #f80606;
 }
 
+h1
+{
+    color:green;
+}
+
+#button
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

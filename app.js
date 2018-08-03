@@ -1,6 +1,7 @@
 $(document).ready(function(){
-    var moves = 1;
+    var moves = 0;
     var play = true;
+    var winner = "";
 
     $("#gboard tr td").click(function()
     {
@@ -10,18 +11,19 @@ $(document).ready(function(){
         //if the cell is empty
         if($(this).text()=="" && play)
         {
+            moves++;
             //input X for first player
             if((moves%2==1))
             {
-                $(this).append('X');                               
+                $(this).append('X');
+                $(this).css('color','red');                               
             }
             //input O for second player
             else
             {
                 $(this).append('O');
                 $(this).css('color','blue'); 
-            }
-            moves++;
+            }           
         
              //Check to see if there is a winner
             if (checkWinner()!=-1 && checkWinner()!="") 
@@ -29,23 +31,29 @@ $(document).ready(function(){
                 console.log("Checked");
                 if (checkWinner()=="X")
                 {
-                    console.log("Player X wins!")
-                    alert("Player 1(X) wins!"); 
+                    winner = "Player 1(X)"; 
                 }
-
                 else
                 { 
-                    alert("Player 2(O) wins!"); 
+                    winner = "Player 2(O)";
                 }
-
                 play = false; 
             }
-            
-        }
-        
-        
+            if(play==false)
+            {
+                $("#resultBanner").text(winner + " wins!");
+                //alert(winner + " wins!");
+            }
+            //if all moves are taken and no one wins, display draw
+            if(play && moves == 9)
+            {
+                $("#resultBanner").text("It's a draw!");
+            }
+
+        }                       
     })
 
+    
     function checkWinner() 
     {
         var cell1="",cell2="",cell3="",cell4="",cell5="",cell6="",cell7="",cell8="",cell9="";
@@ -128,6 +136,23 @@ $(document).ready(function(){
          }
         
     }
+
+    $('#reset').click(function()
+    {
+        var table = $("#gboard tbody");
+        table.find('tr').each(function (i)
+        {
+            var $tds = $(this).find('td');
+            $tds.eq(0).text("");
+            $tds.eq(1).text("");
+            $tds.eq(2).text("");
+        })
+        //reset number of moves
+        moves = 0;
+        play = true;
+        $("#resultBanner").text("");
+
+    })
 
 
 })
