@@ -1,3 +1,4 @@
+/*Style the gameboard*/
 #gboard tr td
 {
     width: 80px;
@@ -6,12 +7,12 @@
     text-align: center;
     color: #f80606;
 }
-
+/*Style for h1 tag*/
 h1
 {
     color:green;
 }
-
+/*Style for button*/
 #button
 {
     display: flex;

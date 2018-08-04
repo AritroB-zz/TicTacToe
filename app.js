@@ -1,24 +1,26 @@
 $(document).ready(function(){
     var moves = 0;
-    var play = true;
+    var play = true;    //indicates if user is allowed to play/click on the board
     var winner = "";
-
+    
+    //When a user clikcs on a cell in gameboard
     $("#gboard tr td").click(function()
     {
-        //if it is player one's turn, fill cell with X
-        // determine if move is odd
         
-        //if the cell is empty
+        //if the cell is empty and user is allowed to play
         if($(this).text()=="" && play)
         {
+            //increment the value for move
             moves++;
-            //input X for first player
+            
+            // determine if move is odd
             if((moves%2==1))
             {
+                //if it is player one's turn, fill cell with X and set color to red
                 $(this).append('X');
                 $(this).css('color','red');                               
             }
-            //input O for second player
+            //input O for second player and set color to blue
             else
             {
                 $(this).append('O');
@@ -28,7 +30,7 @@ $(document).ready(function(){
              //Check to see if there is a winner
             if (checkWinner()!=-1 && checkWinner()!="") 
             { 
-                console.log("Checked");
+
                 if (checkWinner()=="X")
                 {
                     winner = "Player 1(X)"; 
@@ -37,12 +39,13 @@ $(document).ready(function(){
                 { 
                     winner = "Player 2(O)";
                 }
+                //disable the player's ability to play further
                 play = false; 
             }
             if(play==false)
             {
+                //fill header with winner
                 $("#resultBanner").text(winner + " wins!");
-                //alert(winner + " wins!");
             }
             //if all moves are taken and no one wins, display draw
             if(play && moves == 9)
@@ -85,10 +88,11 @@ $(document).ready(function(){
              }
         });
 
-        console.log("cells in row 1:" + cell1 + " " + cell2 + " " + cell3);
+        /*console.log("cells in row 1:" + cell1 + " " + cell2 + " " + cell3);
         console.log("cells in row 2:" + cell4 + " " + cell5 + " " + cell6);
-        console.log("cells in row 3:" + cell7 + " " + cell8 + " " + cell9);
+        console.log("cells in row 3:" + cell7 + " " + cell8 + " " + cell9);*/
         
+        //See if row has the same values and return that value
         if((cell1==cell2) && (cell2==cell3)) 
         {
             return cell3; 
@@ -102,10 +106,9 @@ $(document).ready(function(){
             return cell9; 
         }
 
-        // See if columns are equal
+        //See if column has the same values and return that value
         else if ((cell1==cell4) && (cell4==cell7)) 
         { 
-            console.log("cell7: " + cell7);
             return cell7; 
         }
         else if ((cell2==cell5) && (cell5==cell8)) 
@@ -117,7 +120,7 @@ $(document).ready(function(){
             console.log(cell9);
             return cell9; 
         }
-        // See if diagonals are equal
+        //See if diagonal has the same values and return that value
         else if ((cell1==cell5) && (cell5==cell9)) 
         {
            console.log(cell9);
@@ -129,14 +132,14 @@ $(document).ready(function(){
             return cell7; 
         }
 
-        //if there is no winner
+        //if there is no winner return -1
          else
          {
             return -1;
-         }
-        
+         }        
     }
 
+    //clear out all values of the gboard and reset variables
     $('#reset').click(function()
     {
         var table = $("#gboard tbody");
@@ -151,7 +154,6 @@ $(document).ready(function(){
         moves = 0;
         play = true;
         $("#resultBanner").text("");
-
     })
 
 
