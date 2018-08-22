@@ -1,11 +1,18 @@
 /*Style the gameboard*/
 #gboard tr td
 {
+    font-style: Stencil Std;
     width: 80px;
     height: 80px;
-    border: 1px solid rgb(233, 131, 14);
+    border: 3px solid rgb(233, 131, 14);
     text-align: center;
     color: #f80606;
+    background-color: yellow;
+       
+}
+#gboard tr td:hover 
+{
+    background-color: cyan;
 }
 /*Style for h1 tag*/
 h1
